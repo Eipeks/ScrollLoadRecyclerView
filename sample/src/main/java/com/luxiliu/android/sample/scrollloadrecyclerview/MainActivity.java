@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
         final SampleAdapter sampleAdapter = new SampleAdapter();
         sampleAdapter.addData(50);
+
         final ScrollLoadRecyclerView scrollLoadRecyclerView = findViewById(R.id.scroll_load_recycler_view);
         scrollLoadRecyclerView.setLayoutManager(new GridLayoutManager(this, 1));
         scrollLoadRecyclerView.setAdapter(sampleAdapter);
@@ -33,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     protected Void doInBackground(Void... voids) {
                         try {
-                            Thread.sleep(3000);
+                            Thread.sleep(1500);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -47,8 +49,6 @@ public class MainActivity extends AppCompatActivity {
                         sampleAdapter.addData(50);
 
                         scrollLoadRecyclerView.setLoading(false);
-
-                        scrollLoadRecyclerView.setLoadingEnabled(false);
                     }
                 }.execute();
             }
@@ -65,8 +65,8 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public SampleViewHolder onCreateDataViewHolder(ViewGroup parent, int viewType) {
-            View itemView = getLayoutInflater().inflate(R.layout.view_item, parent, false);
-            return new SampleViewHolder(itemView);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_item, parent, false);
+            return new SampleViewHolder(view);
         }
 
         @Override
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private class SampleViewHolder extends ScrollLoadRecyclerView.ViewHolder {
-        TextView textView;
+        private TextView textView;
 
         SampleViewHolder(View itemView) {
             super(itemView);
