@@ -14,10 +14,20 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        release {
+            storeFile file("release.keystore")
+            storePassword SCROLLLOADRECYCLERVIEW_SAMPLE_RELEASE_STORE_PASSWORD
+            keyAlias SCROLLLOADRECYCLERVIEW_SAMPLE_RELEASE_KEY_ALIAS
+            keyPassword SCROLLLOADRECYCLERVIEW_SAMPLE_RELEASE_KEY_PASSWORD
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 }

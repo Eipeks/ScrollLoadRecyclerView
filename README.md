@@ -6,6 +6,7 @@ A powerful Android layout to display a label text on top of another view
 [![Build Status](https://travis-ci.org/luxiliu/ScrollLoadRecyclerView.svg?branch=develop)](https://travis-ci.org/luxiliu/ScrollLoadRecyclerView)
 [![Download](https://api.bintray.com/packages/luxiliu/maven/ScrollLoadRecyclerView/images/download.svg)](https://bintray.com/luxiliu/maven/ScrollLoadRecyclerView/_latestVersion)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.luxiliu/scrollloadrecyclerview/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.luxiliu/scrollloadrecyclerview)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-ScrollLoadRecyclerView-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/6800)
 
 
 Download
