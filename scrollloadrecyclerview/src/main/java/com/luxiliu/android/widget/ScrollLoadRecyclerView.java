@@ -33,7 +33,7 @@ public class ScrollLoadRecyclerView extends RecyclerView {
         super(context, attrs, defStyle);
     }
 
-    public void setOnLoadListener(OnLoadListener onLoadListener) {
+    public void setOnLoadListener(@Nullable OnLoadListener onLoadListener) {
         mOnLoadListener = onLoadListener;
     }
 
@@ -41,17 +41,17 @@ public class ScrollLoadRecyclerView extends RecyclerView {
     public void onScrolled(int dx, int dy) {
         super.onScrolled(dx, dy);
 
-        LayoutManager layoutManager = getLayoutManager();
-        if (layoutManager instanceof GridLayoutManager) {
-            GridLayoutManager gridLayoutManager = (GridLayoutManager) layoutManager;
-            if (gridLayoutManager.findLastVisibleItemPosition() / gridLayoutManager.getSpanCount()
-                    == (gridLayoutManager.getItemCount() - 1) / gridLayoutManager.getSpanCount()) {
-                if (mLoadingEnabled && !mLoading) {
+        if (mLoadingEnabled && !mLoading) {
+            LayoutManager layoutManager = getLayoutManager();
+            if (layoutManager instanceof GridLayoutManager) {
+                GridLayoutManager gridLayoutManager = (GridLayoutManager) layoutManager;
+                if (gridLayoutManager.findLastVisibleItemPosition() / gridLayoutManager.getSpanCount()
+                        == (gridLayoutManager.getItemCount() - 1) / gridLayoutManager.getSpanCount()) {
                     setLoading(true, true);
                 }
+            } else {
+                throw new IllegalStateException("Use GridLayoutManager");
             }
-        } else {
-            throw new IllegalStateException("Use GridLayoutManager");
         }
     }
 
@@ -64,9 +64,9 @@ public class ScrollLoadRecyclerView extends RecyclerView {
             mLoadingEnabled = loadingEnabled;
 
             Adapter adapter = (Adapter) getAdapter();
-            adapter.mProgressVisibility = mLoadingEnabled ? VISIBLE : GONE;
+            adapter.progressVisibility = mLoadingEnabled ? VISIBLE : GONE;
 
-            if (adapter.mProgressVisibility == VISIBLE) {
+            if (adapter.progressVisibility == VISIBLE) {
                 getAdapter().notifyItemInserted(adapter.getItemCount());
             } else {
                 getAdapter().notifyItemRemoved(adapter.getItemCount());
@@ -85,7 +85,7 @@ public class ScrollLoadRecyclerView extends RecyclerView {
     public abstract static class Adapter<VH extends ViewHolder> extends RecyclerView.Adapter<VH> {
         private static final int VIEW_TYPE_PROGRESS = ProgressViewHolder.class.hashCode();
 
-        private int mProgressVisibility = VISIBLE;
+        private int progressVisibility = VISIBLE;
 
         @Override
         public final VH onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -125,7 +125,7 @@ public class ScrollLoadRecyclerView extends RecyclerView {
             if (getDataItemCount() == 0) {
                 return 0;
             } else {
-                if (mProgressVisibility == VISIBLE) {
+                if (progressVisibility == VISIBLE) {
                     return getDataItemCount() + 1;
                 } else {
                     return getDataItemCount();
