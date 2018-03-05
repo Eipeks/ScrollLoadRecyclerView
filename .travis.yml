@@ -27,5 +27,8 @@ android:
     - 'android-sdk-preview-license-.+'
     - 'google-gdk-license-.+'
 
+before_install:
+  - yes | sdkmanager "platforms;android-27"
+
 script:
   - ./gradlew :scrollloadrecyclerview:build
