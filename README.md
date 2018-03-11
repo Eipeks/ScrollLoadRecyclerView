@@ -1,6 +1,6 @@
-LabelLayout
+ScrollLoadRecyclerView
 =======
-A powerful Android layout to display a label text on top of another view
+The ScrollLoadRecyclerView is to allow the user to load more contents via a vertical swipe up gesture
 
 
 [![Build Status](https://travis-ci.org/luxiliu/ScrollLoadRecyclerView.svg?branch=develop)](https://travis-ci.org/luxiliu/ScrollLoadRecyclerView)
